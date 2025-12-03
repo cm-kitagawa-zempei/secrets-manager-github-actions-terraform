@@ -1,0 +1,21 @@
+repos:
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.104.0
+    hooks:
+      # Terraformフォーマット
+      - id: terraform_fmt
+
+      # Terraform構文検証
+      - id: terraform_validate
+
+      # TFLintによるリント
+      - id: terraform_tflint
+        args:
+          - --args=--config=__GIT_WORKING_DIR__/.tflint.hcl
+
+      # ドキュメント自動生成
+      - id: terraform_docs
+        args:
+          - --args=--config=.terraform-docs.yml
+          - --hook-config=--create-file-if-not-exist=true
+

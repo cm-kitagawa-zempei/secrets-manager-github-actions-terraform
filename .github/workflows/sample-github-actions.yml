@@ -1,0 +1,44 @@
+name: "Sample GitHub Actions"
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  AWS_REGION: ap-northeast-1
+
+# OIDC 認証に必要な権限
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  sample-github-actions:
+    name: Sample GitHub Actions
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Get secrets from Secrets Manager
+        uses: aws-actions/aws-secretsmanager-get-secrets@v2
+        with:
+          secret-ids: |
+            DB, sample/db-credentials
+          parse-json-secrets: true
+
+      - name: Use secrets (demo)
+        run: |
+          echo "Database host: ${{ env.DB_HOST }}"
+          echo "Database port: ${{ env.DB_PORT }}"
+          echo "Database name: ${{ env.DB_DATABASE }}"
+          echo "Database user: ${{ env.DB_USERNAME }}"
+          # パスワードは出力しない（自動的にマスクされる）
+          echo "Password is set: $([ -n \"$DB_PASSWORD\" ] && echo 'yes' || echo 'no')"

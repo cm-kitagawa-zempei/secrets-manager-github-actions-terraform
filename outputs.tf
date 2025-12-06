@@ -7,4 +7,3 @@ output "secret_name" {
   description = "Secrets Manager secret name"
   value       = aws_secretsmanager_secret.db_credentials.name
 }
-

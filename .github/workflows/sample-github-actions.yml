@@ -3,7 +3,7 @@ name: "Sample GitHub Actions"
 on:
   push:
     branches: [main]
-  workflow_dispatch:
+  workflow_dispatch:  # 手動実行用
 
 env:
   AWS_REGION: ap-northeast-1
@@ -31,14 +31,14 @@ jobs:
         uses: aws-actions/aws-secretsmanager-get-secrets@v2
         with:
           secret-ids: |
-            DB, sample/db-credentials
+            DB_SECRETS, sample/db-credentials
           parse-json-secrets: true
 
       - name: Use secrets (demo)
         run: |
-          echo "Database host: ${{ env.DB_HOST }}"
-          echo "Database port: ${{ env.DB_PORT }}"
-          echo "Database name: ${{ env.DB_DATABASE }}"
-          echo "Database user: ${{ env.DB_USERNAME }}"
+          echo "Database host: ${{ env.DB_SECRETS_HOST }}"
+          echo "Database port: ${{ env.DB_SECRETS_PORT }}"
+          echo "Database name: ${{ env.DB_SECRETS_DATABASE }}"
+          echo "Database user: ${{ env.DB_SECRETS_USERNAME }}"
           # パスワードは出力しない（自動的にマスクされる）
-          echo "Password is set: $([ -n \"$DB_PASSWORD\" ] && echo 'yes' || echo 'no')"
+          echo "Password is set: $([ -n \"$DB_SECRETS_PASSWORD\" ] && echo 'yes' || echo 'no')"

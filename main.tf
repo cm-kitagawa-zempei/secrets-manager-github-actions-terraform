@@ -17,12 +17,8 @@ provider "aws" {
 # OIDC Provider for GitHub Actions
 # ============================================
 resource "aws_iam_openid_connect_provider" "github_actions" {
-  url = "https://token.actions.githubusercontent.com"
-
-  client_id_list = ["sts.amazonaws.com"]
-
-  # GitHub Actions の OIDC プロバイダーは AWS が信頼するルート CA を使用するため
-  # thumbprint_list は空でも動作するが、明示的に設定することも可能
+  url             = "https://token.actions.githubusercontent.com"
+  client_id_list  = ["sts.amazonaws.com"]
   thumbprint_list = ["ffffffffffffffffffffffffffffffffffffffff"]
 }
 
@@ -49,7 +45,7 @@ data "aws_iam_policy_document" "github_actions_assume_role" {
     condition {
       test     = "StringLike"
       variable = "token.actions.githubusercontent.com:sub"
-      values   = ["repo:${var.github_org}/${var.github_repo}:*"]
+      values   = ["repo:${var.github_org_or_user}/${var.github_repo}:*"]
     }
   }
 }
@@ -95,8 +91,9 @@ resource "aws_secretsmanager_secret_version" "db_credentials" {
     host     = "db.example.com"
     port     = 5432
     username = "app_user"
-    password = "change-me-in-production"
+    password = "initial-password-v1"
     database = "myapp"
+    version  = "v1" # ローテーション確認用
   })
 }
 

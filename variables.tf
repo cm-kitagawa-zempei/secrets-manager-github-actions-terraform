@@ -1,5 +1,5 @@
-variable "github_org" {
-  description = "GitHub organization name"
+variable "github_org_or_user" {
+  description = "GitHub organization name (for org repos) or username (for personal repos)"
   type        = string
 }
 
@@ -13,4 +13,3 @@ variable "aws_region" {
   type        = string
   default     = "ap-northeast-1"
 }
-

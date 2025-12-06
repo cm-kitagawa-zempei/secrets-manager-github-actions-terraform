@@ -32,7 +32,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_github_org"></a> [github\_org](#input\_github\_org) | GitHub organization name | `string` | n/a | yes |
+| <a name="input_github_org_or_user"></a> [github\_org\_or\_user](#input\_github\_org\_or\_user) | GitHub organization name (for org repos) or username (for personal repos) | `string` | n/a | yes |
 | <a name="input_github_repo"></a> [github\_repo](#input\_github\_repo) | GitHub repository name | `string` | n/a | yes |
 | <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | AWS region | `string` | `"ap-northeast-1"` | no |
 

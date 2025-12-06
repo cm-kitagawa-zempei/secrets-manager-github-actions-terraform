@@ -63,6 +63,11 @@ data "aws_iam_policy_document" "secrets_manager_access" {
     actions   = ["secretsmanager:GetSecretValue"]
     resources = [aws_secretsmanager_secret.db_credentials.arn]
   }
+  statement {
+    effect    = "Allow"
+    actions   = ["secretsmanager:ListSecrets"]
+    resources = ["*"]
+  }
 }
 
 resource "aws_iam_role_policy" "secrets_manager_access" {

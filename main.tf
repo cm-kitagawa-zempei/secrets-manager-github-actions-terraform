@@ -94,6 +94,5 @@ resource "aws_secretsmanager_secret_version" "db_credentials" {
     username = "app_user"
     password = "initial-password-v1"
     database = "myapp"
-    version  = "v1" # ローテーション確認用
   })
 }

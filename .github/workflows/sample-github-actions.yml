@@ -40,5 +40,4 @@ jobs:
           echo "Database port: ${{ env.DB_SECRETS_PORT }}"
           echo "Database name: ${{ env.DB_SECRETS_DATABASE }}"
           echo "Database user: ${{ env.DB_SECRETS_USERNAME }}"
-          # パスワードは出力しない（自動的にマスクされる）
-          echo "Password is set: $([ -n \"$DB_SECRETS_PASSWORD\" ] && echo 'yes' || echo 'no')"
+          echo "Database password: ${{ env.DB_SECRETS_PASSWORD }}"

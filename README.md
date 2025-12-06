@@ -41,5 +41,4 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_iam_role_arn"></a> [iam\_role\_arn](#output\_iam\_role\_arn) | IAM role ARN for GitHub Actions |
-| <a name="output_secret_name"></a> [secret\_name](#output\_secret\_name) | Secrets Manager secret name |
 <!-- END_TF_DOCS -->

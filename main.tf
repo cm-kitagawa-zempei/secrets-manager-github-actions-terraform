@@ -97,4 +97,3 @@ resource "aws_secretsmanager_secret_version" "db_credentials" {
     version  = "v1" # ローテーション確認用
   })
 }
-
